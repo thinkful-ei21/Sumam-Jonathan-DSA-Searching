@@ -8,7 +8,7 @@ class App extends Component {
     super();
     this.state = {
       input: '',
-      result: ''
+      result: ''      
     };
   }
 
@@ -34,9 +34,36 @@ class App extends Component {
     }
   }
 
-  binarySearch() {
-    let input = Number(this.state.input);
-    console.log(sortedArray);
+  binarySearch(array = sortedArray,counter=0, start= 0, end= sortedArray.length) {    
+    let input = Number(this.state.input);      
+    //!(start >= end) {return 'not found'}
+    if(start >= end){
+      this.setState({
+        result: 'Number not in dataset'
+      });
+      return;
+    }
+    //take the middle element  //compare with input , if match return count
+    let midIndex = Math.floor((start + end)/2);
+    if(array[midIndex] === input){  
+      counter++;    
+      this.setState({
+        result: `It took ${counter} iterations`        
+      });
+      return;
+    }
+    if(array[midIndex] > input){
+      counter++;     
+      let newEnd = midIndex - 1;
+      console.log(array.slice(start,newEnd));
+      this.binarySearch(array,counter, start,newEnd);
+    }
+    if(array[midIndex] < input){
+      counter++;    
+      let newStart = midIndex + 1;
+      console.log(array.slice(newStart,end));
+      this.binarySearch(array,counter,newStart,end);
+    }    
   }
 
   render() {
