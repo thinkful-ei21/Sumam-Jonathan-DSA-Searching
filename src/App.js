@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import array from './array';
+import { array, sortedArray } from './array';
 
 import './App.css';
 
@@ -36,7 +36,6 @@ class App extends Component {
 
   binarySearch() {
     let input = Number(this.state.input);
-    let sortedArray = array.sort((a, b) => a - b);
     console.log(sortedArray);
   }
 
@@ -46,8 +45,8 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">DSA-Searching</h1>
           <span>
-            Enter a number to find out how many times it takes to locate you
-            number in the dataset
+            Enter a number to find out how many iterations it takes to locate
+            the first instance of yout number in the given dataset.
           </span>
           <h3>DataSet </h3>
           <p className="dataset">
@@ -64,7 +63,6 @@ class App extends Component {
               className="text-input"
               type="text"
               onChange={e => this.updateInput(e.target.value)}
-              scroll="auto"
             />
             <button className="button" onClick={() => this.linearSearch()}>
               Linear Search
